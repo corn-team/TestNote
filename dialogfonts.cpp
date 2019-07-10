@@ -7,12 +7,18 @@ DialogFonts::DialogFonts(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QFontDatabase database;
-    //TODO
+    setFixedSize(width / 2, height / 2);
+    ui->listWidget_Font->setMinimumWidth(width / 5);
 
-    for (int size : sizes) {
+    QFontDatabase database;
+
+    ui->listWidget_Font->addItems(database.families());
+
+    for (int size : database.standardSizes()) {
         ui->listWidget_Size->addItem(QString::number(size));
     }
+
+
 }
 
 DialogFonts::~DialogFonts()

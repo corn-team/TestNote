@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include <QFontDatabase>
+#include <QDesktopWidget>
 
 namespace Ui {
 class DialogFonts;
@@ -19,7 +20,10 @@ public:
 
 private:
     Ui::DialogFonts *ui;
-    QVector<int> sizes{8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72};
+
+    QDesktopWidget desktopWidget;
+    int width = desktopWidget.width();
+    int height = desktopWidget.height();
 };
 
 #endif // DIALOGFONTS_H
