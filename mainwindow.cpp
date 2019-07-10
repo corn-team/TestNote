@@ -179,7 +179,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
         switch (dialogClose->reply) {
         case 0:
             if (!save()) {
-                closeEvent(event);
+                closeReply = false;
+                break;
             }
             closeReply = true;
             event->accept();
