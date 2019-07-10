@@ -42,6 +42,9 @@ void MainWindow::setNewWindowTitle(QString name)
     if (pos != -1) {
         name = name.right(name.size() - pos - 1);
     }
+
+    name = "COCOCO: " + name;
+
     setWindowTitle(name);
 }
 
