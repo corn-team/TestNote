@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(save()));
     connect(ui->actionSave_As, SIGNAL(triggered()), this, SLOT(saveAs()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(exit()));
+
     connect(ui->actionUndo, SIGNAL(triggered()), this, SLOT(undo()));
     connect(ui->actionRedo, SIGNAL(triggered()), this, SLOT(redo()));
     connect(ui->actionCopy, SIGNAL(triggered()), this, SLOT(copy()));
@@ -28,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
     connect(ui->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateStatusBar()));
+
+    connect(ui->actionChange_Case, SIGNAL(triggered()), this, SLOT(changeCaseLetters()));
 }
 
 MainWindow::~MainWindow()
@@ -203,11 +206,11 @@ void MainWindow::on_actionAbout_Qt_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, "About us", "Made by the TEST team<br>"
+    QMessageBox::about(this, "About us", "Made by the CORN team<br>"
                                          "Our contacts : <br>"
-                                         "<a href='https://vk.com/leonid1313'>VK page</a><br>"
+                                         "vk page: <a href='https://vk.com/leonid1313'>https://vk.com/leonid1313</a><br>"
                                          "Email: ll441369@gmail.com<br>"
-                                         "\nversion 0.1.3");
+                                         "\n\nversion 0.1.3");
 }
 
 void MainWindow::updateStatusBar()
@@ -225,4 +228,24 @@ void MainWindow::on_actionFont_triggered()
 {
     dialogFonts = new DialogFonts(this);
     dialogFonts->exec();
+}
+
+void MainWindow::changeCaseLetters()
+{
+    QString text = ui->textEdit->toPlainText();
+
+    QTextCursor textCursor = ui->textEdit->textCursor();
+    int from = textCursor.selectionStart();
+    int to = textCursor.selectionEnd();
+
+    for (int i = from; i < to; i++) {
+        if (!text.at(i).isLetter()) continue;
+        if (text.at(i).isLower()) text[i] = text.at(i).toUpper();
+            else text[i] = text.at(i).toLower();
+        }
+
+    ui->textEdit->setText(text);
+    textCursor.setPosition(from);
+    textCursor.setPosition(to, QTextCursor::KeepAnchor);
+    ui->textEdit->setTextCursor(textCursor);
 }
