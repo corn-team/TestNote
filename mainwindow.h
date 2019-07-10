@@ -55,11 +55,9 @@ private slots:
 
     void on_actionAbout_triggered();
 
-    void on_textEdit_cursorPositionChanged();
-
-    void on_textEdit_selectionChanged();
-
     void on_actionFont_triggered();
+
+    void updateStatusBar();
 
 private:
     Ui::MainWindow *ui;

@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionCopy, SIGNAL(triggered()), this, SLOT(copy()));
     connect(ui->actionCut, SIGNAL(triggered()), this, SLOT(cut()));
     connect(ui->actionPaste, SIGNAL(triggered()), this, SLOT(paste()));
+
+    connect(ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
+    connect(ui->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateStatusBar()));
 }
 
 MainWindow::~MainWindow()
@@ -203,25 +206,19 @@ void MainWindow::on_actionAbout_triggered()
     QMessageBox::about(this, "About us", "Made by the TEST team<br>"
                                          "Our contacts : <br>"
                                          "<a href='https://vk.com/leonid1313'>VK page</a><br>"
-                                         "Email: ll441369@gmail.com");
+                                         "Email: ll441369@gmail.com<br>"
+                                         "\nversion 0.1.3");
 }
 
-void MainWindow::on_textEdit_cursorPositionChanged()
+void MainWindow::updateStatusBar()
 {
     QTextCursor textCursor = ui->textEdit->textCursor();
     int x = textCursor.blockNumber();
     int y = textCursor.columnNumber();
-    ui->label_Status->setText("Line: " + QString::number(x + 1) + ", Column: " + QString::number(y + 1));
-}
-
-void MainWindow::on_textEdit_selectionChanged()
-{
-    QTextCursor textCursor = ui->textEdit->textCursor();
-    int x = textCursor.blockNumber();
-    int y = textCursor.columnNumber();
-    int size = textCursor.selectionEnd() - textCursor.selectionStart();
-    ui->label_Status->setText("Line: " + QString::number(x + 1) + ", Column: " + QString::number(y + 1) +
-                               (size > 0 ? ", Selected: " + QString::number(size) : ""));
+    int size = ui->textEdit->toPlainText().size();
+    int sizeSelected = textCursor.selectionEnd() - textCursor.selectionStart();
+    ui->label_Status->setText("Line: " + QString::number(x + 1) + ", Column: " + QString::number(y + 1) + ", Size: " +
+                              QString::number(size) + (sizeSelected > 0 ? ", Selected: " + QString::number(sizeSelected) : ""));
 }
 
 void MainWindow::on_actionFont_triggered()
