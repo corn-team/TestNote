@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     resize(width * 7 / 10, height * 7 / 10);
     setMinimumSize(width * 2 / 10, height * 2 / 10);
-    setWindowTitle("New File COCOCO");
+    setWindowTitle("New File");
 
     ui->statusBar->addPermanentWidget(ui->label_Status);
     currentFile = "";
