@@ -72,7 +72,11 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
+<<<<<<< HEAD
       <widget class="QLabel" name="label_Example">
+=======
+      <widget class="QLabel" name="exampleText">
+>>>>>>> fc7ee931c059c4f8e1a00213f7274be4747626eb
        <property name="minimumSize">
         <size>
          <width>250</width>
@@ -124,7 +128,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_">
+        <widget class="QPushButton" name="pushButton_C">
          <property name="maximumSize">
           <size>
            <width>100</width>
