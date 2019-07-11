@@ -227,8 +227,9 @@ void MainWindow::updateStatusBar()
 
 void MainWindow::on_actionFont_triggered()
 {
-    dialogFonts = new DialogFonts(this);
+    dialogFonts = new DialogFonts(this, new QFont(ui->textEdit->font()));
     dialogFonts->exec();
+    ui->textEdit->setFont(dialogFonts->finalFont);
 }
 
 void MainWindow::changeCaseLetters()
@@ -244,15 +245,18 @@ void MainWindow::changeCaseLetters()
             if (text.at(i).isLower()) text[i] = text.at(i).toUpper();
             else text[i] = text.at(i).toLower();
         }
+        ui->textEdit->setText(text);
+        textCursor.setPosition(from);
+        textCursor.setPosition(to, QTextCursor::KeepAnchor);
     } else {
         for (QChar &ch : text) {
             if (!ch.isLetter()) continue;
             if (ch.isLower()) ch = ch.toUpper();
             else ch = ch.toLower();
         }
+        ui->textEdit->setText(text);
+        textCursor.setPosition(0);
+        textCursor.setPosition(to, QTextCursor::KeepAnchor);
     }
-    ui->textEdit->setText(text);
-    textCursor.setPosition(from);
-    textCursor.setPosition(to, QTextCursor::KeepAnchor);
     ui->textEdit->setTextCursor(textCursor);
 }
