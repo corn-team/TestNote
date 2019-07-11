@@ -33,6 +33,10 @@ private slots:
 
     void cancel();
 
+    void on_listWidget_Size_itemClicked(QListWidgetItem *item);
+
+    void on_lineEdit_Size_textChanged(const QString &arg1);
+
 private:
     Ui::DialogFonts *ui;
 
