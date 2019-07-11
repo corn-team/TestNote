@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->textEdit, SIGNAL(cursorPositionChanged()), this, SLOT(updateStatusBar()));
     connect(ui->textEdit, SIGNAL(selectionChanged()), this, SLOT(updateStatusBar()));
+
+    connect(ui->actionChange_Case, SIGNAL(triggered()), this, SLOT(changeCaseLetters()));
 }
 
 MainWindow::~MainWindow()
@@ -177,6 +179,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
         case 0:
             if (!save()) {
                 closeEvent(event);
+                closeReply = false;
+                break;
             }
             closeReply = true;
             event->accept();
@@ -225,4 +229,30 @@ void MainWindow::on_actionFont_triggered()
 {
     dialogFonts = new DialogFonts(this);
     dialogFonts->exec();
+}
+
+void MainWindow::changeCaseLetters()
+{
+    QString text = ui->textEdit->toPlainText();
+
+    QTextCursor textCursor = ui->textEdit->textCursor();
+    int from = textCursor.selectionStart();
+    int to = textCursor.selectionEnd();
+    if (from != to) {
+        for (int i = from; i < to; i++) {
+            if (!text.at(i).isLetter()) continue;
+            if (text.at(i).isLower()) text[i] = text.at(i).toUpper();
+            else text[i] = text.at(i).toLower();
+        }
+    } else {
+        for (QChar &ch : text) {
+            if (!ch.isLetter()) continue;
+            if (ch.isLower()) ch = ch.toUpper();
+            else ch = ch.toLower();
+        }
+    }
+    ui->textEdit->setText(text);
+    textCursor.setPosition(from);
+    textCursor.setPosition(to, QTextCursor::KeepAnchor);
+    ui->textEdit->setTextCursor(textCursor);
 }

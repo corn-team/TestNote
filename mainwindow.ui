@@ -95,6 +95,7 @@
      <string>Format</string>
     </property>
     <addaction name="actionFont"/>
+    <addaction name="actionChange_Case"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -195,6 +196,11 @@
   <action name="actionFont">
    <property name="text">
     <string>Font...</string>
+   </property>
+  </action>
+  <action name="actionChange_Case">
+   <property name="text">
+    <string>Change Case</string>
    </property>
   </action>
  </widget>

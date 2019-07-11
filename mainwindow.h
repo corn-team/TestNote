@@ -59,6 +59,8 @@ private slots:
 
     void updateStatusBar();
 
+    void changeCaseLetters();
+
 private:
     Ui::MainWindow *ui;
 
