@@ -163,7 +163,7 @@ void MainWindow::paste()
 
 void MainWindow::on_textEdit_textChanged()
 {
-    qDebug() << 3;
+//    qDebug() << 3;
     if (saved) {
         saved = false;
         setWindowTitle(windowTitle() + "*");
@@ -207,7 +207,7 @@ void MainWindow::on_actionAbout_Qt_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, "About us", "Made by the TEST team<br>"
+    QMessageBox::about(this, "About us", "Made by the CORN team<br>"
                                          "Our contacts : <br>"
                                          "<a href='https://vk.com/leonid1313'>VK page</a><br>"
                                          "Email: ll441369@gmail.com<br>"
@@ -239,24 +239,19 @@ void MainWindow::changeCaseLetters()
     QTextCursor textCursor = ui->textEdit->textCursor();
     int from = textCursor.selectionStart();
     int to = textCursor.selectionEnd();
-    if (from != to) {
-        for (int i = from; i < to; i++) {
-            if (!text.at(i).isLetter()) continue;
-            if (text.at(i).isLower()) text[i] = text.at(i).toUpper();
-            else text[i] = text.at(i).toLower();
-        }
-        ui->textEdit->setText(text);
-        textCursor.setPosition(from);
-        textCursor.setPosition(to, QTextCursor::KeepAnchor);
-    } else {
-        for (QChar &ch : text) {
-            if (!ch.isLetter()) continue;
-            if (ch.isLower()) ch = ch.toUpper();
-            else ch = ch.toLower();
-        }
-        ui->textEdit->setText(text);
-        textCursor.setPosition(0);
-        textCursor.setPosition(to, QTextCursor::KeepAnchor);
+//    qDebug() << from << ' ' << to ;
+    if (from == to) {
+        from = 0;
+        to = text.size();
     }
+    for (int i = from; i < to; i++) {
+        if (!text.at(i).isLetter()) continue;
+        if (text.at(i).isLower()) text[i] = text.at(i).toUpper();
+        else text[i] = text.at(i).toLower();
+    }
+
+    ui->textEdit->setText(text);
+    textCursor.setPosition(from);
+    textCursor.setPosition(to, QTextCursor::KeepAnchor);
     ui->textEdit->setTextCursor(textCursor);
 }

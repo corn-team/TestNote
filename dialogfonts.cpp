@@ -49,9 +49,9 @@ DialogFonts::DialogFonts(QWidget *parent, QFont *font) :
             styles.insert(s);
         }
     }
-    for (QString s : styles) {
-        qDebug() << s;
-    }
+//    for (QString s : styles) {
+//        qDebug() << s;
+//    }
 
     for (int size : database.standardSizes()) {
         ui->listWidget_Size->addItem(QString::number(size));
@@ -105,11 +105,13 @@ void DialogFonts::on_lineEdit_Size_textChanged(const QString &arg1)
 
 void DialogFonts::changeFont(QString font)
 {
-    QFont f(font);
-    f.setBold(ui->checkBox_Bold->isChecked());
-    f.setItalic(ui->checkBox_Italic->isChecked());
+    QFont cnt = ui->label->font();
 
-    ui->label->setFont(f);
+    cnt.setFamily(font);
+    cnt.setBold(ui->checkBox_Bold->isChecked());
+    cnt.setItalic(ui->checkBox_Italic->isChecked());
+
+    ui->label->setFont(cnt);
 
     ui->lineEdit_Font->setFont(font);
 }
