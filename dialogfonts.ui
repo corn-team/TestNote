@@ -46,7 +46,14 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QLineEdit" name="lineEdit_Size"/>
+        <widget class="QLineEdit" name="lineEdit_Size">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QListWidget" name="listWidget_Size">
@@ -65,7 +72,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_Example">
        <property name="minimumSize">
         <size>
          <width>250</width>
@@ -78,8 +85,11 @@
          <kerning>true</kerning>
         </font>
        </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
        <property name="frameShape">
-        <enum>QFrame::Box</enum>
+        <enum>QFrame::Panel</enum>
        </property>
        <property name="frameShadow">
         <enum>QFrame::Sunken</enum>
