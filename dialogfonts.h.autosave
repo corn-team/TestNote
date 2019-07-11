@@ -17,6 +17,7 @@ class DialogFonts : public QDialog
 public:
     explicit DialogFonts(QWidget *parent = nullptr);
     ~DialogFonts();
+    QFont currentFontSet;
 
 private:
     Ui::DialogFonts *ui;
@@ -33,6 +34,7 @@ private slots:
     void on_listWidget_Font_itemSelectionChanged();
     void on_listWidget_Style_itemSelectionChanged();
     void on_listWidget_Size_itemSelectionChanged();
+    void on_listWidget_Font_viewportEntered();
 };
 
 #endif // DIALOGFONTS_H
